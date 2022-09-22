@@ -1,0 +1,75 @@
+{
+  "name": "@formio/angular",
+  "version": "5.4.0-rc.1",
+  "scripts": {
+    "ng": "ng",
+    "build": "ng build angular-formio && npm run version",
+    "build:watch": "ng build angular-formio --watch",
+    "build:prod": "ng build angular-formio --configuration production && npm run version",
+    "version": "VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\\\",]//g' | tr -d '[[:space:]]') && ./node_modules/replace-in-file/bin/cli.js \"VERSION\" \"$VERSION\" dist/angular-formio/package.json",
+    "docs": "npm run docs:build",
+    "docs:build": "compodoc -p tsconfig.json -n angular-formio -d docs --hideGenerator",
+    "docs:serve": "npm run docs:build -- -s",
+    "docs:watch": "npm run docs:build -- -s -w",
+    "publish": "npm run build:prod && npm publish ./dist/angular-formio --tag=rc",
+    "publish:latest": "npm run build:prod && npm publish ./dist/angular-formio",
+    "test": "ng test",
+    "lint": "ng lint",
+    "postinstall": "node -e 'var fs=require(`fs`);var fname=`./projects/angular-formio/package.json`;var pjson=require(fname);pjson.version=require(`./package.json`).version;fs.writeFileSync(fname,JSON.stringify(pjson,null, 2))'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formio/angular-formio"
+  },
+  "author": {
+    "name": "Travis Tidwell",
+    "email": "travis@form.io"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/formio/angular-formio/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.1.0",
+    "@angular/animations": "^14.1.0",
+    "@angular/cli": "^14.1.0",
+    "@angular/common": "^14.1.0",
+    "@angular/compiler": "^14.1.0",
+    "@angular/compiler-cli": "^14.1.0",
+    "@angular/core": "^14.1.0",
+    "@angular/elements": "^14.1.0",
+    "@angular/forms": "^14.1.0",
+    "@angular/platform-browser": "^14.1.0",
+    "@angular/platform-browser-dynamic": "^14.1.0",
+    "@angular/router": "^14.1.0",
+    "@compodoc/compodoc": "^1.1.19",
+    "@types/jasmine": "^4.3.0",
+    "@types/jasminewd2": "^2.0.10",
+    "@types/node": "^18.7.14",
+    "codelyzer": "^6.0.2",
+    "formiojs": "^4.14.8",
+    "jasmine-core": "^4.3.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "karma": "^6.4.0",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-coverage-istanbul-reporter": "~3.0.2",
+    "karma-jasmine": "^5.1.0",
+    "karma-jasmine-html-reporter": "^2.0.0",
+    "ng-packagr": "^14.1.0",
+    "ngx-bootstrap": "^9.0.0",
+    "protractor": "~7.0.0",
+    "replace-in-file": "^6.3.5",
+    "rxjs": "^7.5.6",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "tslint": "~6.1.0",
+    "typescript": "^4.8.2",
+    "zone.js": "^0.11.8"
+  }
+}
